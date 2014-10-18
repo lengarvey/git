@@ -136,13 +136,36 @@ function current_repository() {
   echo $(git remote -v | cut -d':' -f 2)
 }
 
+function grpull() {
+  if [[ -n $1 ]]; then
+    git pull --rebase $1 $(current_branch)
+  else
+    git pull --rebase origin $(current_branch)
+  fi
+}
+
+function ggpush() {
+  if [[ -n $1 ]]; then
+    git push $1 $(current_branch)
+  else
+    git push origin $(current_branch)
+  fi
+}
+function ggpull() {
+  if [[ -n $1 ]]; then
+    git pull $1 $(current_branch)
+  else
+    git pull origin $(current_branch)
+  fi
+}
+
 # these aliases take advantage of the previous function
-alias ggpull='git pull origin $(current_branch)'
-compdef ggpull=git
-alias ggpur='git pull --rebase origin $(current_branch)'
-compdef ggpur=git
-alias ggpush='git push origin $(current_branch)'
-compdef ggpush=git
+# alias ggpull='git pull origin $(current_branch)'
+# compdef ggpull=git
+# alias ggpur='git pull --rebase origin $(current_branch)'
+# compdef ggpur=git
+# alias ggpush='git push origin $(current_branch)'
+# compdef ggpush=git
 alias ggpnp='git pull origin $(current_branch) && git push origin $(current_branch)'
 compdef ggpnp=git
 
