@@ -151,6 +151,13 @@ function ggpush() {
     git push origin $(current_branch)
   fi
 }
+function gfpush() {
+  if [[ -n $1 ]]; then
+    git push -f $1 $(current_branch)
+  else
+    git push -f origin $(current_branch)
+  fi
+}
 function ggpull() {
   if [[ -n $1 ]]; then
     git pull $1 $(current_branch)
